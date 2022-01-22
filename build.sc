@@ -5,7 +5,7 @@ import mill.scalalib.scalafmt._
 
 trait ScalaChessStegModule extends CommonConfig {
 
-  def millSourcePath = build.millSourcePath / "ScalaChessSteg"
+  def millSourcePath      = build.millSourcePath / "ScalaChessSteg"
   def submoduleSourcePath = build.millSourcePath / "submodules"
 
   override def sources = T.sources(
@@ -15,7 +15,8 @@ trait ScalaChessStegModule extends CommonConfig {
   )
 
   override def ivyDeps = Agg(
-    ivy"org.typelevel::cats-core::2.2.0",
+    ivy"org.typelevel::cats-parse::0.3.6",
+    ivy"org.typelevel::cats-core::2.7.0",
     ivy"org.scala-lang.modules::scala-parser-combinators::1.1.2",
     ivy"io.github.cquiroz::scala-java-locales::1.2.0"
   )
