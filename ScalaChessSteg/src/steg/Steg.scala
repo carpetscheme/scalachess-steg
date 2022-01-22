@@ -16,10 +16,8 @@ object Steg {
     decodeNum(chess)
       .map(_.toByteArray.map(_.toChar).mkString)
 
-  def encodeNum(bigInt: BigInt): String = {
-    val (_, game) = steg(bigInt, chess.Setup(chess.variant.Standard))
-    game.pgnMoves.mkString(" ")
-  }
+  def encodeNum(bigInt: BigInt): String =
+    steg(bigInt, chess.Setup(chess.variant.Standard)).pgnMoves.mkString(" ")
 
   def decodeNum(in: String): Validated[String, BigInt] =
     Reader
@@ -29,8 +27,8 @@ object Steg {
       .map(unSteg)
 
   @tailrec
-  private def steg(num: BigInt, game: chess.Game): (BigInt, chess.Game) =
-    if (num < 1) (num, game)
+  private def steg(num: BigInt, game: chess.Game): chess.Game =
+    if (num < 1) game
     else {
       val possibleMoves = game.situation.moves.ordered
       val mod           = num % possibleMoves.size
