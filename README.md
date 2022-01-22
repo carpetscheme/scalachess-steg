@@ -5,7 +5,8 @@ A tool to encode/decode messages as chess games, based on [James Stanley's chess
 Reimplemented in Scala using lichess' [scalachess library](https://github.com/ornicar/scalachess)
 and compiled to JavaScript with [Scala.js](https://www.scala-js.org/) (with some help from [scalachessjs](https://github.com/veloce/scalachessjs)).
 
-[Try it out online!](https://carpetscheme.github.io/scalachess-steg)
+:chess_pawn: __[Try it out online!](https://carpetscheme.github.io/scalachess-steg/)__
+
 
 ## Build
 
@@ -22,9 +23,9 @@ Test ScalaChessSteg:
 $ mill ScalaChessStegJvm.test
 
 ```
-Build JavaScript (to `out/ScalaChessStegJS/fullOpt/dest/out.js`)
+Build JavaScript (to `out/ChessStegJS/fullOpt/dest/out.js`)
 ```
-$ mill ScalaChessStegJS.fullOpt
+$ mill ChessStegJS.fullOpt
 
 ```
 Bonus! Run as CLI:
