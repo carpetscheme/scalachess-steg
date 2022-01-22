@@ -1,24 +1,61 @@
-import coursier.maven.MavenRepository
 import mill._
+import mill.scalajslib.ScalaJSModule
 import mill.scalalib._
 import mill.scalalib.scalafmt._
 
-object ScalaChessSteg extends ScalaModule with ScalafmtModule {
-  def scalaVersion = "2.13.6"
+trait ScalaChessStegModule extends CommonConfig {
 
-  override def repositoriesTask = T.task {
-    super.repositoriesTask() ++ Seq(
-      MavenRepository("https://raw.githubusercontent.com/ornicar/lila-maven/master")
-    )
-  }
+  def millSourcePath = build.millSourcePath / "ScalaChessSteg"
+  def submoduleSourcePath = build.millSourcePath / "submodules"
 
-  override def ivyDeps = Agg(
-    ivy"org.lichess::scalachess:10.2.7",
+  override def sources = T.sources(
+    millSourcePath / "src",
+    submoduleSourcePath / "scalachess" / "src" / "main",
+    submoduleSourcePath / "scalalib" / "src" / "main"
   )
 
-  object test extends Tests with TestModule.Utest {
+  override def ivyDeps = Agg(
+    ivy"org.typelevel::cats-core::2.2.0",
+    ivy"org.scala-lang.modules::scala-parser-combinators::1.1.2",
+    ivy"io.github.cquiroz::scala-java-locales::1.2.0"
+  )
+
+}
+
+object ScalaChessStegJvm extends ScalaChessStegModule {
+
+  object test extends ScalaModuleTests with TestModule.Utest {
     override def ivyDeps = Agg(ivy"com.lihaoyi::utest:0.7.10")
   }
+
+}
+
+object ScalaChessStegJs extends ScalaChessStegModule with ScalaJSModule {
+  def scalaJSVersion = "1.7.0"
+}
+
+object ChessStegCli extends CommonConfig {
+  override def moduleDeps = Seq(ScalaChessStegJvm)
+
+  override def ivyDeps = Agg(
+    ivy"com.monovore::decline:1.3.0"
+  )
+}
+
+object ChessStegJS extends ScalaJSModule with CommonConfig {
+  def scalaJSVersion = "1.7.0"
+
+  override def moduleDeps = Seq(ScalaChessStegJs)
+
+  override def ivyDeps = Agg(
+    ivy"org.scala-js::scalajs-dom::1.1.0",
+    ivy"com.raquo::laminar::0.13.1"
+  )
+}
+
+trait CommonConfig extends ScalafmtModule with ScalaModule {
+
+  def scalaVersion = "2.13.6"
 
   override def scalacOptions = Seq(
     "-encoding",
@@ -59,4 +96,3 @@ object ScalaChessSteg extends ScalaModule with ScalafmtModule {
   )
 
 }
-

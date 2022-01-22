@@ -1,0 +1,6 @@
+[submodule "submodules/scalalib"]
+	path = submodules/scalalib
+	url = git@github.com:ornicar/scalalib.git
+[submodule "submodules/scalachess"]
+	path = submodules/scalachess
+	url = git@github.com:ornicar/scalachess.git

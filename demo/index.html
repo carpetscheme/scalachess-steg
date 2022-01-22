@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>ScalaChess Steg</title>
+    <meta name="description" content="Chess steganography with the scalachess library"/>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body id="app-container">
+<main id="main" role="main">
+
+    <header role="banner">
+        <h3 style="margin-top:0;">
+            <a href="#" title="Home">ScalaChess Steg</a>
+            <br/><small>Chess steganography with the scalachess library</small>
+        </h3>
+    </header>
+    <hr/>
+
+    <article id="article">
+
+        <p>
+            Hiding messages in chess games! Based on <a
+                href="https://incoherency.co.uk/blog/stories/chess-steg.html"
+                title="James Stanley's chess-steg">James Stanley's chess-steg</a>, reimplemented in
+            Scala using lichess' <a href="https://github.com/ornicar/scalachess"> scalachess
+            library</a> and compiled to JavaScript with <a
+                href="https://www.scala-js.org/">Scala.js</a>.
+        </p>
+        <p>
+            Try it out below by encoding (steg) a message as a chess game. You can then view the
+            game on lichess (or share the url with your recipient!) Paste the PGN chess moves to
+            decode (unsteg) and retrieve the message.
+        </p>
+
+    </article>
+
+
+    <footer role="contentinfo">
+        <hr/>
+
+        <nav style="margin-bottom:1rem;" role="navigation">
+
+            <a href="https://github.com/carpetscheme/scalachess-steg">Source on Github</a>
+
+        </nav>
+
+
+    </footer>
+
+</main>
+
+<!-- Include Scala.js compiled code -->
+<script type="text/javascript" src="chess-steg.js"></script>
+</body>
+</html>
+
